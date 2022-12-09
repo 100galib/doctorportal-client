@@ -1,15 +1,13 @@
 import React from 'react';
 
-const Infocard = () => {
+const Infocard = ({singleData}) => {
+    const {name, data, icon, bgColor} = singleData;
     return (
-        <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/200/280/arch" alt="Movie"/></figure>
+        <div className={`card card-side ${bgColor} text-white shadow-xl mt-28 py-6 px-7`}>
+            <figure><img src={icon} alt="Movie"/></figure>
             <div className="card-body">
-                <h2 className="card-title">New movie is released!</h2>
-                <p>Click the button to watch on Jetflix app.</p>
-                <div className="card-actions justify-end">
-                <button className="btn btn-primary">Watch</button>
-                </div>
+                <h2 className="card-title">{name}</h2>
+                <p>{data}</p>
             </div>
         </div>
     );

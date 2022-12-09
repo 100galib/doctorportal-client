@@ -3,7 +3,7 @@ import rightImage from '../../../../assets/images/chair.png';
 
 const Banner = () => {
     return (
-        <div className="hero">
+        <div className="hero mt-20">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={rightImage} className="shadow-2xl lg:max-w-xl" alt='banner area'/>
                 <div>
