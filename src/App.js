@@ -4,9 +4,9 @@ import router from './Components/Routes/Routes';
 
 function App() {
   return (
-
-    <RouterProvider router={router}></RouterProvider>
-
+    <div className='max-w-[1440px]'>
+      <RouterProvider router={router}></RouterProvider>
+    </div>
   );
 }
 
