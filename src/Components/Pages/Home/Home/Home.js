@@ -4,6 +4,7 @@ import bgImage from '../../../../assets/images/bg.png';
 import Infocards from '../Infocards/Infocards';
 import Services from '../Services/Services';
 import Terms from '../Terms/Terms';
+import Appoinment from '../Appoinment/Appoinment';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             </div>
             <Services></Services>
             <Terms></Terms>
+            <Appoinment></Appoinment>
         </div>
     );
 };
