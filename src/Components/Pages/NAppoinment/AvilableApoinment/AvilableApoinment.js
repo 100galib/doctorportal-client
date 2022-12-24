@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import AvailableAppinmentSlots from './AvailableAppinmentSlots';
+import BookingModal from '../BookingModal/BookingModal';
 
 const AvilableApoinment = ({select}) => {
     const [appoinment, setAppoinment] = useState([]);
+    const [treatment, setTreatment] = useState(null);
 
     useEffect(() => {
         fetch('appoinment.json')
@@ -17,9 +19,10 @@ const AvilableApoinment = ({select}) => {
             </div>
             <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-9'>
                 {
-                    appoinment.map(option => <AvailableAppinmentSlots key={option._id} aviableOption={option}></AvailableAppinmentSlots>)
+                    appoinment.map(option => <AvailableAppinmentSlots key={option._id} aviableOption={option} setTreatment={setTreatment}></AvailableAppinmentSlots>)
                 }
             </div>
+            {treatment && <BookingModal setTreatment={setTreatment} select={select} treatment={treatment}></BookingModal>}
         </section>
     );
 };
