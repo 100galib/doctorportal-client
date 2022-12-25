@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Registration = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, formState: {errors}, handleSubmit } = useForm();
 
     const handleRegistration = data => {
         console.log(data)
@@ -18,19 +18,22 @@ const Registration = () => {
                         <label className="label"> 
                             <span className="label-text font-bold">Name</span>
                         </label>
-                        <input  {...register("name")} type="text" className="input input-bordered w-full" />
+                        <input  {...register("name", {required: "You must give your name"})} type="text" className="input input-bordered w-full" />
+                        {errors.name && <p role="alert" className='mt-2 text-red-500'>{errors.name?.message}</p>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label"> 
                             <span className="label-text font-bold">Email</span>
                         </label>
-                        <input  {...register("email")} type="email" className="input input-bordered w-full" />
+                        <input  {...register("email", {required: "Email is required"})} type="email" className="input input-bordered w-full" />
+                        {errors.email && <p role="alert" className='mt-2 text-red-500'>{errors.email?.message}</p>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label"> 
                             <span className="label-text font-bold">Password</span>
                         </label>
-                        <input  {...register("password")} type="password" className="input input-bordered w-full" />
+                        <input  {...register("password", {required: 'Password Is required', minLength: {value: 8, message: 'Password Must Be Eight Character'}})} type="password" className="input input-bordered w-full" />
+                        {errors.password && <p role="alert" className='mt-2 text-red-500'>{errors.password?.message}</p>}
                     </div>
                     <input className='btn w-full mt-5' type="submit" value={'Signup'}/>
                 </form>
