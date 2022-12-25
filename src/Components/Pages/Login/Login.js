@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContex } from '../../../Contex/AuthProvider';
 
 const Login = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
+    const [getError, setError] = useState('')
+    const {loginUser} = useContext(AuthContex);
+
+    let showError = getError.slice(getError.indexOf('w'), getError.indexOf(')'))
 
     const handleLogin = data => {
         console.log(data)
+        setError('')
+        loginUser(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+        })
+        .catch(error => {setError(error.message)});
     }
 
     return (
@@ -27,6 +39,7 @@ const Login = () => {
                         </label>
                         <input  {...register("password", {required: "Password is required"})} type="password" className="input input-bordered w-full" />
                         {errors.password && <p role="alert" className='mt-2 text-red-500'>{errors.password?.message}</p>}
+                        {getError && <p className='mt-2 text-red-500'>{showError}</p> }
                     </div>
                     <label className="label"> 
                             <span className="label-text">Forgot Password</span>
