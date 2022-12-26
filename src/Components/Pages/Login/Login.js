@@ -6,7 +6,7 @@ import { AuthContex } from '../../../Contex/AuthProvider';
 const Login = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
     const [getError, setError] = useState('')
-    const {loginUser, googleSignUp} = useContext(AuthContex);
+    const {loginUser, googleSignUp,} = useContext(AuthContex);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -56,7 +56,7 @@ const Login = () => {
                         {getError && <p className='mt-2 text-red-500'>{showError}</p> }
                     </div>
                     <label className="label"> 
-                            <span className="label-text">Forgot Password</span>
+                            <span className="label-text"><button>Forgot Password</button></span>
                     </label>
                     <input className='btn w-full' type="submit" value={'Login'}/>
                 </form>

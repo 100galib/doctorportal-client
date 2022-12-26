@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../../Contex/AuthProvider';
 
 const Registration = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
-    const {signup, updateUser, googleSignUp} = useContext(AuthContex)
+    const {signup, updateUser, googleSignUp} = useContext(AuthContex);
+    const navigate = useNavigate();
 
     const handleRegistration = data => {
-        console.log(data)
         signup(data.email, data.password)
         .then(result => {
             const user = result.user
@@ -19,6 +19,7 @@ const Registration = () => {
             updateUser(upUser)
             .then(() => {})
             .catch(error => console.error(error))
+            navigate('/')
         })
         .catch(error => console.error('error', error))
     }
