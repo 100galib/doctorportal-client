@@ -4,7 +4,13 @@ import { AuthContex } from '../../../../Contex/AuthProvider';
 
 const Navbar = () => {
 
-    const {user} = useContext(AuthContex);
+    const {user, logOut} = useContext(AuthContex);
+
+    const signOut = () => {
+        logOut()
+        .then(() => {})
+        .catch(error => console.error('error', error))
+    }
 
     const navBarItem = <>
         <li><Link to={'/'}>Home</Link></li>
@@ -12,7 +18,7 @@ const Navbar = () => {
         <li><Link to={'/appoinment'}>Appointment</Link></li>
         <li><Link>Reviews</Link></li>
         <li><Link>Contact Us</Link></li>
-        <li>{user.uid ? <Link>Logout</Link> : <Link to={'/login'}>Login</Link>}</li>
+        <li>{user?.uid ? <Link><button onClick={signOut}>Logout</button></Link> : <Link to={'/login'}>Login</Link>}</li>
     </>
 
     return (
