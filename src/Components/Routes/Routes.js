@@ -5,6 +5,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import LayoutAppoinment from "../Pages/NAppoinment/LayoutAppoinment/LayoutAppoinment";
 import Registration from "../Pages/Registration/Registration";
+import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 
 const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/appoinment',
-                element: <LayoutAppoinment></LayoutAppoinment>
+                element: <PrivateRoutes><LayoutAppoinment></LayoutAppoinment></PrivateRoutes>
             }
         ]
     },

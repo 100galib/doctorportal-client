@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../../Contex/AuthProvider';
 
 const Login = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
     const [getError, setError] = useState('')
     const {loginUser, googleSignUp} = useContext(AuthContex);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    let showError = getError.slice(getError.indexOf('w'), getError.indexOf(')'))
+    let showError = getError.slice(getError.indexOf('w'), getError.indexOf(')'));
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = data => {
         console.log(data)
@@ -16,6 +19,7 @@ const Login = () => {
         loginUser(data.email, data.password)
         .then(result => {
             const user = result.user;
+            navigate(from, { replace: true });
             console.log(user)
         })
         .catch(error => {setError(error.message)});
@@ -25,6 +29,7 @@ const Login = () => {
         googleSignUp()
         .then(result => {
             const user = result.user;
+            navigate(from, { replace: true });
             console.log(user)
         })
         .catch(error => console.error(error))
