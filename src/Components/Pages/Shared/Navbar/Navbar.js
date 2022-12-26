@@ -17,8 +17,13 @@ const Navbar = () => {
         <li><Link>About</Link></li>
         <li><Link to={'/appoinment'}>Appointment</Link></li>
         <li><Link>Reviews</Link></li>
-        <li><Link>Contact Us</Link></li>
-        <li>{user?.uid ? <Link><button onClick={signOut}>Logout</button></Link> : <Link to={'/login'}>Login</Link>}</li>
+        {user?.uid ?
+        <>
+            <li><Link to={'/dashboard'}>Dashboard</Link></li>
+            <li><Link><button onClick={signOut}>Logout</button></Link></li>
+        </> 
+         : 
+         <li><Link to={'/login'}>Login</Link></li>}
     </>
 
     return (

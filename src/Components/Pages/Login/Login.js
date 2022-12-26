@@ -6,7 +6,7 @@ import { AuthContex } from '../../../Contex/AuthProvider';
 const Login = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
     const [getError, setError] = useState('')
-    const {loginUser} = useContext(AuthContex);
+    const {loginUser, googleSignUp} = useContext(AuthContex);
 
     let showError = getError.slice(getError.indexOf('w'), getError.indexOf(')'))
 
@@ -19,6 +19,15 @@ const Login = () => {
             console.log(user)
         })
         .catch(error => {setError(error.message)});
+    }
+
+    const googleSignin = () => {
+        googleSignUp()
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+        })
+        .catch(error => console.error(error))
     }
 
     return (
@@ -48,7 +57,7 @@ const Login = () => {
                 </form>
                 <p className='text-xs text-center mt-3'>New To Doctor Portal ? <Link to={'/registration'} className='text-secondary'>Create new account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={googleSignin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

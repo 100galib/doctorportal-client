@@ -5,16 +5,31 @@ import { AuthContex } from '../../../Contex/AuthProvider';
 
 const Registration = () => {
     const { register, formState: {errors}, handleSubmit } = useForm();
-    const {signup} = useContext(AuthContex)
+    const {signup, updateUser, googleSignUp} = useContext(AuthContex)
 
     const handleRegistration = data => {
         console.log(data)
         signup(data.email, data.password)
         .then(result => {
             const user = result.user
-            console.log(user)
+            console.log(user);
+            const upUser = {
+                displayName: data.name
+            }
+            updateUser(upUser)
+            .then(() => {})
+            .catch(error => console.error(error))
         })
         .catch(error => console.error('error', error))
+    }
+
+    const googleSignIn = () => {
+        googleSignUp()
+        .then(result => {
+            const user = result.user
+            console.log(user)
+        })
+        .catch(error => console.error(error))
     }
 
     return (
@@ -47,7 +62,7 @@ const Registration = () => {
                 </form>
                 <p className='text-xs text-center mt-3'>Already Have an Account ? <Link to={'/login'} className='text-secondary'>logIn</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={googleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
